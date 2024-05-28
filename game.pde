@@ -9,13 +9,12 @@ private boolean grounded;
 void setup(){
   size (800, 800);
   x = width/2;
-  y = height/2;
-  grounded = false;
-  speed = 1;
+  y = height - 135;
+  speed = 4;
   alive = true;
 }
 void score(){
-  while (alive){
+  if (alive){
     score++;
   }
   if(score % 1000 == 0){
@@ -23,33 +22,46 @@ void score(){
   }
 }
   void draw(){
-    background(0);
+    background(66, 135, 245);
+    stroke(0);
+    strokeWeight(4);
+    fill(0);
+    line(width, height, width/2, height/2);
+    line(width, 0, width/2, height/2);
+    line(0, 0, width/2, height/2);
+    line(0, height, width/2, height/2);
+    rect(width/2 - 50, height/2 - 50, 100, 100);
+    if (y == height - 135){
+      grounded = true;
+    }
     if(alive){
       guy(x, y);
     }
-    if(key == 'a'){
-    x = x - speed;
-    }
-    if(key == 'd'){
-      x = x + speed;
+    if (keyPressed){
+      if(key == 'a'){
+        x = x - speed;
+      }
+      else if(key == 'd'){
+        x = x + speed;
+      }
+      if (key == ' ' && grounded){
+        jump();
+      }
     }
   }
   
   void guy(int x, int y){
-    stroke(1);
-    strokeWeight(3);
-    fill(64, 222, 140);
-    ellipse(x, y, 150, 150);
+    fill(41, 84, 153);
+    strokeWeight(0);
+    ellipse(x, height - 100, 80, 40);
+    stroke(0);
+    strokeWeight(4);
+    fill(150);
+    ellipse(x, y, 80, 80);
     y ++;
   }
   
-void control(){
-  if(key == 'a'){
-    x = x - speed;
+  void jump(){
+    y = y - 60;
+    grounded = false;
   }
-  if(key == 'd'){
-    x = x + speed;
-  }
-  if(key == ' '){
-  }
-}
