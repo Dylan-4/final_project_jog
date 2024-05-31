@@ -12,18 +12,27 @@ void setup(){
   player.location = new PVector (width/2, ground);
   player.direction = 1;
   player.velocity = new PVector(0, 0);
-  player.walk = 4;
+  player.walk = 5;
   player.jump = 15;
   score = 0;
   alive = true;
 }
 
+void startScreen(){
+  if (alive){
+    textSize (80);
+    text("Choose your character", 40, 200);
+    fill(0);
+    text("Choose your character", 40, 200, -120);
+  }
+}
+
 void score(){
   if (alive){
-    score += 500;
+    score += 4;
   }
   if(score % 1000 == 0){
-    print(score);
+    println("Score is " + score);
   }
 }
 
@@ -45,8 +54,10 @@ void tunnel(){
 }
 
 void draw(){
+  score();
   tunnel();
   update();
+  startScreen();
 }
 
 void update(){
