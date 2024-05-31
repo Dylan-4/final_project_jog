@@ -7,7 +7,7 @@ private int score;
 private int ground = 660;
 
 void setup(){
-  size (800, 800);
+  size (800, 800, P3D);
   player = new Character();
   player.location = new PVector (width/2, ground);
   player.direction = 1;
@@ -21,8 +21,8 @@ void setup(){
 void startScreen(){
   if (alive){
     textSize (80);
-    text("Choose your character", 40, 200);
     fill(0);
+    text("Choose your character", 40, 200);
     text("Choose your character", 40, 200, -120);
   }
 }
