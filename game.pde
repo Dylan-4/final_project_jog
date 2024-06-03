@@ -1,13 +1,13 @@
 private Character player;
 private float grav = 0.5;
-private String name;
-private boolean alive;
+private boolean alive, started;
 private float up, down, left, right;
 private int score;
 private int ground = 660;
+private int jumps = 2;
 
 void setup(){
-  size (800, 800, P3D);
+  size (800, 800);
   player = new Character();
   player.location = new PVector (width/2, ground);
   player.direction = 1;
@@ -16,14 +16,34 @@ void setup(){
   player.jump = 15;
   score = 0;
   alive = true;
+  started = true;
+}
+
+void draw(){
+  if(alive && started){
+    score();
+    tunnel();
+    update();
+    startScreen();
+  }
+  else {
+    background(0);
+    textSize (120);
+    fill(235, 64, 52);
+    text("YOU DIED", 160, 200);
+    textSize (80);
+    text("Your score was: " + score, 60, 450);
+    fill(66, 135, 245);
+    textSize (60);
+    text("Press = to play again", 150, 650);
+  }
 }
 
 void startScreen(){
   if (alive){
     textSize (80);
     fill(0);
-    text("Choose your character", 40, 200);
-    text("Choose your character", 40, 200, -120);
+    text("SURVIVE", 255, 80);
   }
 }
 
@@ -53,12 +73,6 @@ void tunnel(){
   rect(width/2 - 50, height/2 - 50, 100, 100);
 }
 
-void draw(){
-  score();
-  tunnel();
-  update();
-  startScreen();
-}
 
 void update(){
   if (player.location.y < ground){
@@ -115,6 +129,13 @@ void keyPressed(){
   }
   if (key == ' '){
     up = -1;
+  }
+  if (key == 'o'){
+    alive = false;
+  }
+  if (key == '=' && !alive){
+    setup();
+    
   }
 }
 
