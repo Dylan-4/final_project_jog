@@ -4,7 +4,6 @@ private boolean alive, started;
 private float up, down, left, right;
 private int score;
 private int ground = 660;
-private int jumps = 2;
 
 void setup(){
   size (800, 800);
@@ -13,10 +12,10 @@ void setup(){
   player.direction = 1;
   player.velocity = new PVector(0, 0);
   player.walk = 5;
-  player.jump = 15;
+  player.jump = 18;
   score = 0;
-  alive = true;
-  started = true;
+  alive = false;
+  started = false;
 }
 
 void draw(){
@@ -26,7 +25,20 @@ void draw(){
     update();
     startScreen();
   }
-  else {
+  else if (!started && !alive) {
+    background(255);
+    textSize (120);
+    fill(235, 64, 52);
+    text("Jog", 300, 180);
+    fill(66, 135, 245);
+    textSize (60);
+    text("Press = to start", 220, 650);
+    stroke(80);
+    strokeWeight(4);
+    fill(150);
+    ellipse(width/2, height/2, 250, 250);
+  }
+  else if (started && !alive){
     background(0);
     textSize (120);
     fill(235, 64, 52);
@@ -88,10 +100,21 @@ void update(){
 void guy(float x, float y){
   fill(0);
   strokeWeight(0);
-  ellipse(x, height - 100, 80, 40);
-  stroke(0);
+  ellipse(x, height - 97, 80, 40);
+  stroke(80);
   strokeWeight(4);
   fill(150);
+  line(x, y, x + 35, y - 60);
+  line(x, y, x - 35, y - 60);
+  ellipse(x + 35, y - 60, 8, 8);
+  ellipse(x - 35, y - 60, 8, 8);
+  
+  triangle(x + 15, y - 23, x + 65, y + 6, x + 45, y + 14);
+  triangle(x - 15, y - 23, x - 65, y + 6, x - 45, y + 14);
+  
+  triangle(x + 6, y + 20, x + 14, y + 52, x + 35, y + 45);
+  triangle(x - 6, y + 20, x - 14, y + 52, x - 35, y + 45);
+  
   ellipse(x, y, 80, 80);
   y ++;
 }
@@ -135,7 +158,8 @@ void keyPressed(){
   }
   if (key == '=' && !alive){
     setup();
-    
+    alive = true;
+    started = true;
   }
 }
 
