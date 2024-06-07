@@ -23,7 +23,7 @@ void draw(){
     score();
     tunnel();
     update();
-    startScreen();
+    scoreDraw();
   }
   else if (!started && !alive) {
     background(255);
@@ -51,20 +51,28 @@ void draw(){
   }
 }
 
-void startScreen(){
+void generate(){
+  String[] tiles = {"empty", "spikes", "wall", "bounce"};
+  String[] current = {"empty", "empty", "empty", "empty"};
+  String[] generated = {"empty", "empty", "empty", "empty"};
+  if (score % 100 == 0){
+    for (int i = 0; i < generated.length; i++){
+      generated[i] = tiles[int(random(tiles.length))];
+    }
+  }
+}
+
+void scoreDraw(){
   if (alive){
     textSize (80);
     fill(0);
-    text("SURVIVE", 255, 80);
+    text("SCORE: " + score, 230, 80);
   }
 }
 
 void score(){
   if (alive){
-    score += 4;
-  }
-  if(score % 1000 == 0){
-    println("Score is " + score);
+    score += 1;
   }
 }
 
@@ -78,7 +86,10 @@ void tunnel(){
   line(0, 0, width/2, height/2);
   line(0, height, width/2, height/2);
   rect(width/2 - 50, height/2 - 50, 100, 100);
+  fill(0, 0);
+  rect(width/2 -(score % 380) - 50, height/2-(score % 380) - 50, 100 + (score % 800), 100 + (score % 800));
   
+  fill(0);
   line(width/2, height, width/2, height/2);
   line(width/4, height, width/2, height/2);
   line(3*width/4, height, width/2, height/2);
