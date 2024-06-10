@@ -1,4 +1,5 @@
 private Character player;
+private MyTile[] tiles = {new MyTile(1, 0), new MyTile (2, 0), new MyTile(3, 0), new MyTile(4, 0)};
 private float grav = 0.5;
 private boolean alive, started;
 private float up, down, left, right;
@@ -33,10 +34,12 @@ void draw(){
     fill(66, 135, 245);
     textSize (60);
     text("Press = to start", 220, 650);
-    stroke(80);
+    stroke(0);
     strokeWeight(4);
-    fill(150);
+    fill(200);
     ellipse(width/2, height/2, 250, 250);
+    fill(0);
+    triangle(width/2 + 40, height/2, width/2 - 40, height/2 - 40, width/2 - 40, height/2 + 40);
   }
   else if (started && !alive){
     background(0);
@@ -52,14 +55,7 @@ void draw(){
 }
 
 void generate(){
-  String[] tiles = {"empty", "spikes", "wall", "bounce"};
-  String[] current = {"empty", "empty", "empty", "empty"};
-  String[] generated = {"empty", "empty", "empty", "empty"};
-  if (score % 100 == 0){
-    for (int i = 0; i < generated.length; i++){
-      generated[i] = tiles[int(random(tiles.length))];
-    }
-  }
+  
 }
 
 void scoreDraw(){
@@ -87,7 +83,7 @@ void tunnel(){
   line(0, height, width/2, height/2);
   rect(width/2 - 50, height/2 - 50, 100, 100);
   fill(0, 0);
-  rect(width/2 -(score % 380) - 50, height/2-(score % 380) - 50, 100 + (score % 800), 100 + (score % 800));
+  rect(width/2 -(2 * score % 400), height/2-(2 * score % 400), 2 * ((2 * score % 400)), 2 * ((2 * score % 400)));
   
   fill(0);
   line(width/2, height, width/2, height/2);
