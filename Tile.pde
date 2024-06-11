@@ -1,13 +1,17 @@
-class MyTile{
-PVector location;
+public class Tile{
 boolean spike;
+int lane;
+float multi;
 
-MyTile(int x, int y){
-  location = new PVector(x, y);
-  if (random(4) < 1){
+Tile(int l, float m){
+  float r = random(3);
+  if (r < 1){
     spike = true;
   } else{
     spike = false;
   }
+  lane = l;
+  multi = m;
 }
+
 }
