@@ -1,9 +1,9 @@
 public class Tile{
 boolean spike;
 int lane;
-float multi;
+float p1, p2;
 
-Tile(int l, float m){
+Tile(int l, float s, float e){
   float r = random(3);
   if (r < 1){
     spike = true;
@@ -11,7 +11,8 @@ Tile(int l, float m){
     spike = false;
   }
   lane = l;
-  multi = m;
+  p1 = s;
+  p2 = e;
 }
 
 }
