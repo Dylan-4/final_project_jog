@@ -1,5 +1,5 @@
 private Character player;
-private Tile one1, two1, three1, four1, one2, two2, three2, four2;
+private Tile one, two , three, four;
 private float grav = 0.5;
 private boolean alive, started;
 private float up, down, left, right;
@@ -71,20 +71,13 @@ void draw(){
 }
 
 void generate(){
-  if (score % 200 == 0){
-    one1 = new Tile(1, 0.8192);
-    two1 = new Tile(2, 1.024);
-    three1 = new Tile(3, 1.28);
-    four1 = new Tile(4, 1.6);
-    one2 = new Tile(1, 2);
-    two2 = new Tile(2, 2.5);
-    three2 = new Tile(3, 3.125);
-    four2 = new Tile(4, 3.90625);
+  if (score % 100 == 0){
+    one = new Tile(1, 20, 25);
   }
 }
 
 void tileDraw(Tile t){
-  float d = t.multi;
+  float d = 2;
   if (t.spike){
     fill(245, 66, 66);
   } else {
@@ -104,6 +97,19 @@ void tileDraw(Tile t){
   } 
 }
 
+void tileDraw2(Tile t){
+  if (t.spike){
+    fill(245, 66, 66);
+  } else {
+    fill(0, 0);
+  }
+  if (t.lane == 1){
+    quad(width/2 - t.p1, height/2 + t.p1, width/2 - t.p1/2, height/2 + t.p1, width/2 - t.p2/2, height/2 + t.p2, width/2 - t.p2, height/2 + t.p2);
+    t.p1 += t.p1 * 0.03;
+    t.p2 += t.p2 * 0.03;
+  }
+}
+
 void tunnel(){
   background(66, 135, 245);
   stroke(0);
@@ -115,21 +121,12 @@ void tunnel(){
   line(0, height, width/2, height/2);
   rect(width/2 - 50, height/2 - 50, 100, 100);
   fill(0, 0);
-  rect(width/2 -(2 * score % 400), height/2-(2 * score % 400), 2 * ((2 * score % 400)), 2 * ((2 * score % 400)));
-  rect(width/2 -(2.5 * score % 500), height/2-(2.5 * score % 500), 2 * ((2.5 * score % 500)), 2 * ((2.5 * score % 500)));
   
   fill(0);
   line(width/2, height, width/2, height/2);
   line(width/4, height, width/2, height/2);
   line(3*width/4, height, width/2, height/2);
-  tileDraw(one1);
-  tileDraw(two1);
-  tileDraw(three1);
-  tileDraw(four1);
-  tileDraw(one2);
-  tileDraw(two2);
-  tileDraw(three2);
-  tileDraw(four2);
+  tileDraw2(one);
   fill(0);
   rect(width/2 - 50, height/2 - 50, 100, 100);
 }
