@@ -180,7 +180,7 @@ void generate(){
 
 void update(){
   //if not on the ground, gravity affects velocity
-  if (player.location.y < ground){
+  if (ground > player.location.y){
     player.velocity.y += grav;
   }
   else {
@@ -193,7 +193,7 @@ void update(){
 void control(){
   //detects if player is on the ground and not already jumping
   if (ground <= player.location.y && up != 0){
-    player.velocity.y = -player.jump;
+    player.velocity.y -= player.jump;
   }
   //adds left and right together so movement is neutral when both directions are pressed
   player.velocity.x = (left + right) * player.walk;
