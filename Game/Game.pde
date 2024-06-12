@@ -216,6 +216,7 @@ void keyPressed(){
   }
   if (key == 's'){
     down = 1;
+    grav += 0.6;
   }
   if (key == ' '){
     up = -1;
@@ -243,6 +244,7 @@ void keyReleased(){
   }
   if (key == 's'){
     down = 0;
+    grav = 0.6;
   }
   if (key == ' '){
     up = 0;
