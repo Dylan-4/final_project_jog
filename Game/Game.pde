@@ -210,11 +210,9 @@ void control(){
 void keyPressed(){
   if (key == 'a'){
     left = -1;
-    player.direction = 1;
   }
   if (key == 'd'){
     right = 1;
-    player.direction = -1;
   }
   if (key == 's'){
     down = 1;
